@@ -1,6 +1,10 @@
 const map = L.map('map').setView([19.0330, 73.0297], 13);
 
-const markers = {}; // store markers
+// ✅ BASE URL
+const BASE_URL = "https://election-waale-waadein.onrender.com";
+
+const markers = {}; 
+let markerLayer = []; // store markers to clear later
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
@@ -16,33 +20,44 @@ navigator.geolocation.getCurrentPosition(pos => {
     .bindPopup("📍 You are here");
 });
 
-// load complaints
+// 🗺️ load complaints
 async function loadMap() {
-  const res = await fetch("http://https://election-waale-waadein.onrender.com/api/complaints");
-  const data = await res.json();
+  try {
+    const res = await fetch(`${BASE_URL}/api/complaints`);
+    const data = await res.json();
 
-  data.forEach(c => {
-    let color = c.status === "resolved" ? "green" : "orange";
+    // 🧹 clear old markers (important)
+    markerLayer.forEach(m => map.removeLayer(m));
+    markerLayer = [];
 
-    const marker = L.circleMarker([c.lat, c.lng], {
-      color,
-      radius: 10
-    }).addTo(map)
-      .bindPopup(`
-  <b>${c.title}</b><br>
-  ${c.description}<br>
-  ${
-    c.image
-      ? `<img src="${c.image}" style="width:100px; border-radius:8px; margin-top:5px;" />`
-      : ""
+    data.forEach(c => {
+      let color = c.status === "resolved" ? "green" : "orange";
+
+      const marker = L.circleMarker([c.lat, c.lng], {
+        color,
+        radius: 10,
+        fillOpacity: 0.7
+      }).addTo(map)
+        .bindPopup(`
+          <b>${c.title}</b><br>
+          ${c.description}<br>
+          ${
+            c.image
+              ? `<img src="${c.image}" style="width:100px; border-radius:8px; margin-top:5px;" />`
+              : ""
+          }
+        `);
+
+      markers[c.id] = marker;
+      markerLayer.push(marker);
+    });
+
+  } catch (err) {
+    console.error("Map load error:", err);
   }
-`);
-
-    markers[c.id] = marker; // store marker
-  });
 }
 
-// 🔥 global function (important)
+// 🔥 focus on marker
 window.focusOnMap = function (id) {
   const marker = markers[id];
   if (marker) {
@@ -51,4 +66,8 @@ window.focusOnMap = function (id) {
   }
 };
 
+// 🚀 initial load
 loadMap();
+
+// 🔄 auto refresh map
+setInterval(loadMap, 5000);

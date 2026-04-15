@@ -1,4 +1,4 @@
-const BASE_URL = "http://https://election-waale-waadein.onrender.com/api";
+const BASE_URL = "http://election-waale-waadein.onrender.com/api";
 
 export async function getComplaints() {
   const res = await fetch(`${BASE_URL}/complaints`);

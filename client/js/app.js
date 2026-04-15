@@ -1,12 +1,15 @@
 const list = document.getElementById("complaintList");
 const searchInput = document.getElementById("search");
 
+// ✅ BASE URL (correct)
+const BASE_URL = "https://election-waale-waadein.onrender.com";
+
 async function loadComplaints() {
   try {
     // 🔄 Loading state
-    list.innerHTML = "<p>Loading...</p>";
+    list.innerHTML = "<p>Server waking up... please wait ⏳</p>";
 
-    const res = await fetch("http://https://election-waale-waadein.onrender.com/api/complaints");
+    const res = await fetch(`${BASE_URL}/api/complaints`);
     const data = await res.json();
 
     // 📊 Update stats
@@ -26,7 +29,7 @@ async function loadComplaints() {
 
     // ❌ No results
     if (filtered.length === 0) {
-      list.innerHTML = "<p>No issues found</p>";
+      list.innerHTML = "<p>No issues found 🚫</p>";
       return;
     }
 
@@ -39,47 +42,50 @@ async function loadComplaints() {
         item.status === "resolved" ? "green" : "orange";
 
       div.innerHTML = `
-  <h4>${item.title}</h4>
-  <p>${item.description}</p>
+        <h4>${item.title}</h4>
+        <p>${item.description}</p>
 
-  ${
-    item.image
-      ? `<img src="${item.image}" style="width:100%; border-radius:8px; margin:5px 0;" />`
-      : ""
-  }
+        ${
+          item.image
+            ? `<img src="${item.image}" style="width:100%; border-radius:8px; margin:5px 0;" />`
+            : ""
+        }
 
-  <span style="
-    padding:5px 10px;
-    background:${statusColor};
-    border-radius:5px;
-    font-size:12px;
-  ">
-    ${item.status}
-  </span>
-  <br><br>
-  <button onclick="event.stopPropagation(); updateStatus(${item.id})">
-    Mark Resolved
-  </button>
-`;
+        <span style="
+          padding:5px 10px;
+          background:${statusColor};
+          border-radius:5px;
+          font-size:12px;
+        ">
+          ${item.status}
+        </span>
+        <br><br>
+        <button onclick="event.stopPropagation(); updateStatus(${item.id})">
+          Mark Resolved
+        </button>
+      `;
 
-div.style.cursor = "pointer";
+      div.style.cursor = "pointer";
 
-// 🔥 click → focus map
-div.onclick = () => {
-  window.focusOnMap(item.id);
-};
+      // 🔥 click → focus map
+      div.onclick = () => {
+        if (window.focusOnMap) {
+          window.focusOnMap(item.id);
+        }
+      };
 
       list.appendChild(div);
     });
 
   } catch (error) {
     console.error(error);
-    list.innerHTML = "<p style='color:red;'>Error loading data</p>";
+    list.innerHTML = "<p style='color:red;'>Error loading data ❌</p>";
   }
 }
 
+// 🔄 update status
 window.updateStatus = async function (id) {
-  await fetch(`http://https://election-waale-waadein.onrender.com/api/complaints/${id}`, {
+  await fetch(`${BASE_URL}/api/complaints/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -87,7 +93,7 @@ window.updateStatus = async function (id) {
     body: JSON.stringify({ status: "resolved" })
   });
 
-  loadComplaints(); // refresh
+  loadComplaints();
 };
 
 // 🔍 Live search
@@ -96,5 +102,5 @@ searchInput.addEventListener("input", loadComplaints);
 // 🚀 Initial load
 loadComplaints();
 
-// 🔄 Auto refresh every 5 sec
+// 🔄 Auto refresh
 setInterval(loadComplaints, 5000);

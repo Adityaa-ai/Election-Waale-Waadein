@@ -2,7 +2,7 @@ const tbody = document.getElementById("tbody");
 
 async function loadAdmin() {
   try {
-    const res = await fetch("http://localhost:5000/api/complaints");
+    const res = await fetch("https://election-waale-waadein.onrender.com/api/complaints");
     const data = await res.json();
 
     tbody.innerHTML = "";
@@ -34,7 +34,7 @@ window.updateStatus = async function (id) {
   try {
     console.log("Updating ID:", id);
 
-    const res = await fetch(`http://localhost:5000/api/complaints/${id}`, {
+    const res = await fetch(`https://election-waale-waadein.onrender.com/api/complaints/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

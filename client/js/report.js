@@ -31,7 +31,7 @@ form.addEventListener("submit", async (e) => {
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
 
-    await fetch("http://https://election-waale-waadein.onrender.com/api/complaints", {
+    await fetch("http://election-waale-waadein.onrender.com/api/complaints", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

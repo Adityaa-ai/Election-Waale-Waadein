@@ -2,7 +2,7 @@ const tbody = document.getElementById("tbody");
 
 async function loadAdmin() {
   try {
-    const res = await fetch("http://https://election-waale-waadein.onrender.com/api/complaints");
+    const res = await fetch("https://election-waale-waadein.onrender.com/api/complaints");
     const data = await res.json();
 
     tbody.innerHTML = "";
