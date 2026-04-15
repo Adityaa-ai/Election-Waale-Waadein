@@ -1,0 +1,148 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+
+.navbar h2 {
+  margin: 0;
+}
+
+.navbar button {
+  background: #00c6ff;
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  height: 90vh;
+}
+
+#map {
+  width: 70%;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.complaints {
+  width: 30%;
+  margin: 10px;
+  padding: 15px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+}
+
+.card {
+  background: rgba(255,255,255,0.15);
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  background: rgba(255,255,255,0.25);
+}
+
+form {
+  padding: 20px;
+}
+
+input, textarea {
+  width: 300px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+button {
+  background: #00c6ff;
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 8px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.stat {
+  text-align: center;
+  background: rgba(255,255,255,0.15);
+  padding: 10px;
+  border-radius: 8px;
+  width: 30%;
+}
+
+#search {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.card {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#complaintList p {
+  text-align: center;
+  opacity: 0.8;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background: rgba(0,0,0,0.3);
+}
+
+tr:nth-child(even) {
+  background: rgba(255,255,255,0.05);
+}
+
+button {
+  cursor: pointer;
+}

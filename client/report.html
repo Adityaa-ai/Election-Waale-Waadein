@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Report Issue</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<h2 style="padding:20px;">Report Issue</h2>
+
+<form id="reportForm" style="padding:20px;">
+  <input type="text" placeholder="Title" id="title" required><br><br>
+  <textarea placeholder="Description" id="description" required></textarea><br><br>
+
+  <input type="file" id="image"><br><br>
+
+  <!-- 👇 preview -->
+  <img id="preview" style="width:200px; display:none; border-radius:10px;" />
+
+  <br><br>
+  <button type="submit">Submit</button>
+</form>
+
+<script type="module" src="js/report.js"></script>
+
+</body>
+</html>
