@@ -1,4 +1,5 @@
 console.log("APP LOADED");
+console.log("APP JS RUNNING");
 const list = document.getElementById("complaintList");
 const searchInput = document.getElementById("search");
 
