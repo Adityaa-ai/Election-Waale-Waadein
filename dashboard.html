@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Civic Reporter</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+
+<body>
+
+<nav class="navbar">
+  <h2>Civic Reporter</h2>
+  <button onclick="window.location.href='report.html'">Report Issue</button>
+  <button onclick="window.location.href='admin.html'">Admin</button>
+</nav>
+
+<input type="text" id="search" placeholder="Search issues..." />
+
+<div class="container">
+  
+  <div id="map"></div>
+
+  <div class="complaints">
+    <div class="stats">
+  <div class="stat">
+    <h4 id="total">0</h4>
+    <p>Total</p>
+  </div>
+  <div class="stat">
+    <h4 id="pending">0</h4>
+    <p>Pending</p>
+  </div>
+  <div class="stat">
+    <h4 id="resolved">0</h4>
+    <p>Resolved</p>
+  </div>
+</div>
+    <h3>Recent Issues</h3>
+    <div id="complaintList"></div>
+  </div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script type="module" src="js/app.js"></script>
+<script type="module" src="js/map.js"></script>
+
+</body>
+</html>

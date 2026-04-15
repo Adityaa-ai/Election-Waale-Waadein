@@ -1,0 +1,18 @@
+const BASE_URL = "http://localhost:5000/api";
+
+export async function getComplaints() {
+  const res = await fetch(`${BASE_URL}/complaints`);
+  return res.json();
+}
+
+export async function addComplaint(data) {
+  const res = await fetch(`${BASE_URL}/complaints`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  return res.json();
+}
