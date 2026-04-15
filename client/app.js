@@ -1,3 +1,4 @@
+console.log("APP LOADED");
 const list = document.getElementById("complaintList");
 const searchInput = document.getElementById("search");
 
